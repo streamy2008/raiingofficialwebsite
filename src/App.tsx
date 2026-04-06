@@ -92,7 +92,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen font-serif">
       {/* --- Navigation --- */}
       <header className="fixed top-0 w-full h-12 backdrop-blur-nav z-[1000]">
         <div className="max-w-5xl mx-auto h-full flex justify-center items-center px-6">
@@ -221,7 +221,7 @@ export default function App() {
             >
               <h3 className="text-2xl font-black mb-4">无线体温传感器</h3>
               <p className="text-base font-bold opacity-85 mb-5">精准实时体温监测，适用于多种医疗场景</p>
-              <div className="max-h-0 opacity-0 group-hover:max-h-[500px] group-hover:opacity-100 group-hover:mt-5 group-hover:pt-5 border-t border-brand-green/10 transition-all duration-500 overflow-hidden">
+              <div className="max-h-[500px] opacity-100 mt-5 pt-5 md:max-h-0 md:opacity-0 md:mt-0 md:pt-0 md:group-hover:max-h-[500px] md:group-hover:opacity-100 md:group-hover:mt-5 md:group-hover:pt-5 border-t border-brand-green/10 transition-all duration-500 overflow-hidden">
                 <p className="text-sm mb-2 leading-relaxed">iThermonitor® 无线体温传感器（腋动脉型）</p>
                 <p className="text-sm mb-2 leading-relaxed">iThermonitor® 无线体温传感器（耳道型）</p>
                 <p className="text-sm mb-2 leading-relaxed">iThermonitor® 无线体温传感器（腔内I型）</p>
@@ -240,7 +240,7 @@ export default function App() {
             >
               <h3 className="text-2xl font-black mb-4">无线体温监测系统</h3>
               <p className="text-base font-bold opacity-85 mb-5">多设备协同工作，实现全院级体温管理</p>
-              <div className="max-h-0 opacity-0 group-hover:max-h-[500px] group-hover:opacity-100 group-hover:mt-5 group-hover:pt-5 border-t border-brand-green/10 transition-all duration-500 overflow-hidden">
+              <div className="max-h-[500px] opacity-100 mt-5 pt-5 md:max-h-0 md:opacity-0 md:mt-0 md:pt-0 md:group-hover:max-h-[500px] md:group-hover:opacity-100 md:group-hover:mt-5 md:group-hover:pt-5 border-t border-brand-green/10 transition-all duration-500 overflow-hidden">
                 <p className="text-sm mb-2 leading-relaxed">万木千帆®CareClever® 无线系统（围手术期）</p>
                 <p className="text-sm mb-2 leading-relaxed">万木千帆®CareClever® 无线系统（智慧病区）</p>
                 <p className="text-sm mb-2 leading-relaxed">万木千帆®CareClever® 无线系统（疫情防控）</p>
@@ -258,7 +258,7 @@ export default function App() {
             >
               <h3 className="text-2xl font-black mb-4">无线可穿戴多参数监护仪</h3>
               <p className="text-base font-bold opacity-85 mb-5">实时监测多项生命体征，提升医疗效率</p>
-              <div className="max-h-0 opacity-0 group-hover:max-h-[500px] group-hover:opacity-100 group-hover:mt-5 group-hover:pt-5 border-t border-brand-green/10 transition-all duration-500 overflow-hidden">
+              <div className="max-h-[500px] opacity-100 mt-5 pt-5 md:max-h-0 md:opacity-0 md:mt-0 md:pt-0 md:group-hover:max-h-[500px] md:group-hover:opacity-100 md:group-hover:mt-5 md:group-hover:pt-5 border-t border-brand-green/10 transition-all duration-500 overflow-hidden">
                 <h5 className="font-bold mb-2">主要应用场景：</h5>
                 <p className="text-sm mb-1 leading-relaxed">内外科普通病房 / 老年病房 / ERAS病房</p>
                 <p className="text-sm mb-1 leading-relaxed">手术室外麻醉 / 转运过程 / 急诊中心</p>
@@ -277,7 +277,7 @@ export default function App() {
             >
               <h3 className="text-2xl font-black mb-4">无线可穿戴多参数监护系统</h3>
               <p className="text-base font-bold opacity-85 mb-5">模块化集成化监护解决方案，支持远程医疗</p>
-              <div className="max-h-0 opacity-0 group-hover:max-h-[500px] group-hover:opacity-100 group-hover:mt-5 group-hover:pt-5 border-t border-brand-green/10 transition-all duration-500 overflow-hidden">
+              <div className="max-h-[500px] opacity-100 mt-5 pt-5 md:max-h-0 md:opacity-0 md:mt-0 md:pt-0 md:group-hover:max-h-[500px] md:group-hover:opacity-100 md:group-hover:mt-5 md:group-hover:pt-5 border-t border-brand-green/10 transition-all duration-500 overflow-hidden">
                 <p className="text-sm mb-2 leading-relaxed">自由穿戴—四组传感器自由穿戴</p>
                 <p className="text-sm mb-2 leading-relaxed">全程在线—医护可随时随地监护</p>
                 <p className="text-sm mb-2 leading-relaxed">多屏互动—中央、移动、手持、床旁</p>
@@ -296,7 +296,7 @@ export default function App() {
             >
               <h3 className="text-2xl font-black mb-4">智能闭环充气升温装置</h3>
               <p className="text-base font-bold opacity-85 mb-5">智能温控，围术期低体温防治专家</p>
-              <div className="max-h-0 opacity-0 group-hover:max-h-[500px] group-hover:opacity-100 group-hover:mt-5 group-hover:pt-5 border-t border-brand-green/10 transition-all duration-500 overflow-hidden">
+              <div className="max-h-[500px] opacity-100 mt-5 pt-5 md:max-h-0 md:opacity-0 md:mt-0 md:pt-0 md:group-hover:max-h-[500px] md:group-hover:opacity-100 md:group-hover:mt-5 md:group-hover:pt-5 border-t border-brand-green/10 transition-all duration-500 overflow-hidden">
                 <p className="text-sm mb-2 leading-relaxed">产品由充气升温装置主机、一次性使用医用充气升温毯、可重复性使用医用充气升温毯和无线体温传感器（可选）、无线体温探头（可选）组成。</p>
                 <p className="text-sm mb-2 leading-relaxed">两种医用充气式升温毯，可二选一。</p>
               </div>

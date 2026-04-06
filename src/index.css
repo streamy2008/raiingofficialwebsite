@@ -1,8 +1,8 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700;900&display=swap');
+@import url('https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@300;400;700;900&display=swap');
 
 @theme {
-  --font-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", "Apple LiSung", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-serif: "Noto Serif SC", "Noto Serif CJK SC", "Source Han Serif SC", "Source Han Serif CN", "Songti SC", "STSong", "SimSun", "Apple LiSung", serif;
   --color-brand-green: #07904C;
   --color-apple-grey: #f5f5f7;
   --animate-breathe: breathe 4s ease-in-out infinite;
@@ -13,7 +13,7 @@
 }
 
 @layer base {
-  body {
+  html, body {
     @apply font-serif bg-white text-brand-green antialiased leading-relaxed;
   }
 }
