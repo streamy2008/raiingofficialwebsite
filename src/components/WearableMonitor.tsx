@@ -80,7 +80,7 @@ const ECGWaveform = () => {
   );
 };
 
-const SliderWrapper = ({ children, value, onChange, min, max, step = 1, align = 'right' }: any) => {
+const SliderWrapper = ({ children, value, onChange, min, max, step = 1, align = 'right', isActive }: any) => {
   const handleDecrease = (e: any) => {
     e.stopPropagation();
     const newVal = Math.max(min, Number(value) - step);
@@ -96,7 +96,9 @@ const SliderWrapper = ({ children, value, onChange, min, max, step = 1, align = 
   return (
     <div className="relative group">
       {children}
-      <div className={`absolute ${align === 'right' ? 'right-0 lg:right-full lg:pr-4' : 'left-0 lg:left-full lg:pl-4'} top-full lg:top-1/2 mt-2 lg:mt-0 lg:-translate-y-1/2 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity z-50 pointer-events-none group-hover:pointer-events-auto focus-within:pointer-events-auto`}>
+      <div className={`absolute ${align === 'right' ? 'right-0 lg:right-full lg:pr-4' : 'left-0 lg:left-full lg:pl-4'} top-full lg:top-1/2 mt-2 lg:mt-0 lg:-translate-y-1/2 transition-opacity z-50 ${isActive ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none lg:group-hover:opacity-100 lg:group-hover:pointer-events-auto'} focus-within:opacity-100 focus-within:pointer-events-auto`}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="bg-black/80 p-3 lg:p-4 rounded-2xl backdrop-blur-md border border-white/20 shadow-2xl flex flex-col items-center gap-3">
           <div className="flex items-center gap-3">
             <button 
@@ -279,12 +281,8 @@ const RandomBreatheCircle = ({ fill, delay = 0 }: { fill: string, delay?: number
   }), []);
 
   return (
-    <motion.circle
-      cx="0"
-      cy="0"
-      r="8"
-      fill={fill}
-      className="origin-center pointer-events-none"
+    <motion.g
+      className="pointer-events-none origin-center"
       animate={randomAnimation}
       transition={{
         duration: 4 + Math.random() * 2,
@@ -292,7 +290,9 @@ const RandomBreatheCircle = ({ fill, delay = 0 }: { fill: string, delay?: number
         ease: "easeInOut",
         delay: delay
       }}
-    />
+    >
+      <circle cx="0" cy="0" r="8" fill={fill} />
+    </motion.g>
   );
 };
 
@@ -434,12 +434,16 @@ export default function WearableMonitor() {
 
         <div className="relative z-30 w-full px-6 lg:px-0 flex flex-row justify-between lg:block mt-4 lg:mt-0">
           <div className="flex flex-col gap-6 lg:gap-16 lg:absolute lg:left-12 lg:top-12 w-[45%] lg:w-auto" onClick={(e) => e.stopPropagation()}>
-            <SliderWrapper value={parseInt(vitalValues.BP.split('/')[0], 10)} onChange={(e: any) => updateVital('BP', `${e.target.value}/80`)} min={60} max={250} align="left">
-              <VitalCard vitalKey="BP" isActive={activeVital === 'BP'} value={vitalValues.BP} />
-            </SliderWrapper>
-            <SliderWrapper value={vitalValues.SpO2} onChange={(e: any) => updateVital('SpO2', Number(e.target.value))} min={70} max={100} align="left">
-              <VitalCard vitalKey="SpO2" isActive={activeVital === 'SpO2'} value={vitalValues.SpO2} />
-            </SliderWrapper>
+            <div onClick={() => setActiveVital('BP')}>
+              <SliderWrapper value={parseInt(vitalValues.BP.split('/')[0], 10)} onChange={(e: any) => updateVital('BP', `${e.target.value}/80`)} min={60} max={250} align="left" isActive={activeVital === 'BP'}>
+                <VitalCard vitalKey="BP" isActive={activeVital === 'BP'} value={vitalValues.BP} />
+              </SliderWrapper>
+            </div>
+            <div onClick={() => setActiveVital('SpO2')}>
+              <SliderWrapper value={vitalValues.SpO2} onChange={(e: any) => updateVital('SpO2', Number(e.target.value))} min={70} max={100} align="left" isActive={activeVital === 'SpO2'}>
+                <VitalCard vitalKey="SpO2" isActive={activeVital === 'SpO2'} value={vitalValues.SpO2} />
+              </SliderWrapper>
+            </div>
             <div className="invisible pointer-events-none h-0 lg:h-auto">
               <VitalCard vitalKey="Resp" isActive={false} value={20} />
             </div>
@@ -460,15 +464,21 @@ export default function WearableMonitor() {
           </div>
 
           <div className="flex flex-col gap-6 lg:gap-16 items-end text-right lg:absolute lg:right-12 lg:top-12 w-[45%] lg:w-auto" onClick={(e) => e.stopPropagation()}>
-            <SliderWrapper value={vitalValues.HR} onChange={(e: any) => updateVital('HR', Number(e.target.value))} min={30} max={200} align="right">
-              <VitalCard vitalKey="HR" isActive={activeVital === 'HR'} value={vitalValues.HR} />
-            </SliderWrapper>
-            <SliderWrapper value={vitalValues.Resp} onChange={(e: any) => updateVital('Resp', Number(e.target.value))} min={5} max={40} align="right">
-              <VitalCard vitalKey="Resp" isActive={activeVital === 'Resp'} value={vitalValues.Resp} />
-            </SliderWrapper>
-            <SliderWrapper value={vitalValues.Temp} onChange={(e: any) => updateVital('Temp', Number(e.target.value))} min={34} max={42} step={0.1} align="right">
-              <VitalCard vitalKey="Temp" isActive={activeVital === 'Temp'} value={vitalValues.Temp} />
-            </SliderWrapper>
+            <div onClick={() => setActiveVital('HR')}>
+              <SliderWrapper value={vitalValues.HR} onChange={(e: any) => updateVital('HR', Number(e.target.value))} min={30} max={200} align="right" isActive={activeVital === 'HR'}>
+                <VitalCard vitalKey="HR" isActive={activeVital === 'HR'} value={vitalValues.HR} />
+              </SliderWrapper>
+            </div>
+            <div onClick={() => setActiveVital('Resp')}>
+              <SliderWrapper value={vitalValues.Resp} onChange={(e: any) => updateVital('Resp', Number(e.target.value))} min={5} max={40} align="right" isActive={activeVital === 'Resp'}>
+                <VitalCard vitalKey="Resp" isActive={activeVital === 'Resp'} value={vitalValues.Resp} />
+              </SliderWrapper>
+            </div>
+            <div onClick={() => setActiveVital('Temp')}>
+              <SliderWrapper value={vitalValues.Temp} onChange={(e: any) => updateVital('Temp', Number(e.target.value))} min={34} max={42} step={0.1} align="right" isActive={activeVital === 'Temp'}>
+                <VitalCard vitalKey="Temp" isActive={activeVital === 'Temp'} value={vitalValues.Temp} />
+              </SliderWrapper>
+            </div>
 
             <div className="flex flex-col gap-3 mt-4 bg-black/10 p-4 rounded-2xl border border-white/10 backdrop-blur-md w-full max-w-[180px] lg:max-w-[256px] text-left">
               <div className="text-xs font-bold opacity-60 uppercase mb-1">NEWS2 附加参数</div>
