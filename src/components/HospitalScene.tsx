@@ -39,7 +39,7 @@ export default function HospitalScene() {
           <h3 className="text-2xl font-black mb-4">中央工作站</h3>
           <p className="text-base font-bold opacity-70 mb-6">全院级病床动态实时掌控，风险分级管理</p>
           
-          <div className="space-y-4 max-h-0 opacity-0 group-hover:max-h-[400px] group-hover:opacity-100 group-hover:mt-8 group-hover:pt-8 border-t border-brand-green/10 transition-all duration-700 overflow-hidden">
+          <div className="space-y-4 max-h-[400px] opacity-100 mt-8 pt-8 md:max-h-0 md:opacity-0 md:mt-0 md:pt-0 md:group-hover:max-h-[400px] md:group-hover:opacity-100 md:group-hover:mt-8 md:group-hover:pt-8 border-t border-brand-green/10 transition-all duration-700 overflow-hidden">
             {[
               { id: 1, risk: 0, color: 'bg-green-500', label: '低风险' },
               { id: 2, risk: 1, color: 'bg-yellow-500', label: '中风险' },
@@ -73,7 +73,7 @@ export default function HospitalScene() {
           <h3 className="text-2xl font-black mb-4">早期风险预警评分</h3>
           <p className="text-base font-bold opacity-70 mb-6">基于多维生命体征的智能评分系统</p>
           
-          <div className="max-h-0 opacity-0 group-hover:max-h-[400px] group-hover:opacity-100 group-hover:mt-8 group-hover:pt-8 border-t border-brand-green/10 transition-all duration-700 overflow-hidden">
+          <div className="max-h-[400px] opacity-100 mt-8 pt-8 md:max-h-0 md:opacity-0 md:mt-0 md:pt-0 md:group-hover:max-h-[400px] md:group-hover:opacity-100 md:group-hover:mt-8 md:group-hover:pt-8 border-t border-brand-green/10 transition-all duration-700 overflow-hidden">
             <div className="grid grid-cols-2 gap-4 mb-6">
               {[
                 { label: '心率', val: 2 },
@@ -108,7 +108,7 @@ export default function HospitalScene() {
           <h3 className="text-2xl font-black mb-4">实时监护数据</h3>
           <p className="text-base font-bold opacity-70 mb-6">毫秒级数据同步，生命体征全程在线</p>
           
-          <div className="space-y-3 max-h-0 opacity-0 group-hover:max-h-[400px] group-hover:opacity-100 group-hover:mt-8 group-hover:pt-8 border-t border-brand-green/10 transition-all duration-700 overflow-hidden">
+          <div className="space-y-3 max-h-[400px] opacity-100 mt-8 pt-8 md:max-h-0 md:opacity-0 md:mt-0 md:pt-0 md:group-hover:max-h-[400px] md:group-hover:opacity-100 md:group-hover:mt-8 md:group-hover:pt-8 border-t border-brand-green/10 transition-all duration-700 overflow-hidden">
             <div className="flex justify-between items-center p-3 border-b border-black/5">
               <span className="text-sm font-bold opacity-60">心率 bpm</span>
               <span className="text-lg font-black text-brand-green">112</span>
@@ -138,7 +138,7 @@ export default function HospitalScene() {
           <h3 className="text-2xl font-black mb-4">智慧病区基础设施</h3>
           <p className="text-base font-bold opacity-70 mb-6">嵌入式医院网络，安全可靠的数据闭环</p>
           
-          <div className="grid grid-cols-2 gap-4 max-h-0 opacity-0 group-hover:max-h-[400px] group-hover:opacity-100 group-hover:mt-8 group-hover:pt-8 border-t border-brand-green/10 transition-all duration-700 overflow-hidden">
+          <div className="grid grid-cols-2 gap-4 max-h-[400px] opacity-100 mt-8 pt-8 md:max-h-0 md:opacity-0 md:mt-0 md:pt-0 md:group-hover:max-h-[400px] md:group-hover:opacity-100 md:group-hover:mt-8 md:group-hover:pt-8 border-t border-brand-green/10 transition-all duration-700 overflow-hidden">
             <div className="p-4 bg-apple-grey rounded-2xl flex flex-col items-center gap-2">
               <Server size={20} className="text-brand-green" />
               <span className="text-[10px] font-black opacity-60">安全服务器</span>

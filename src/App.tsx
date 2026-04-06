@@ -164,13 +164,13 @@ export default function App() {
       </header>
 
       {/* --- Hero Banner --- */}
-      <section className="h-[400px] bg-brand-green flex items-center justify-center mt-12 overflow-hidden">
+      <section className="h-[400px] bg-brand-green flex items-center justify-center mt-12 overflow-hidden px-4">
         <motion.h1 
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={revealVariants}
-          className="text-4xl md:text-5xl font-bold text-white tracking-tight"
+          className="text-4xl md:text-5xl font-bold text-white tracking-tight text-center"
         >
           Connect Health For Tomorrow
         </motion.h1>
@@ -183,12 +183,12 @@ export default function App() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={revealVariants}
-          className="max-w-5xl mx-auto"
+          className="max-w-5xl mx-auto flex flex-col items-center"
         >
-          <h2 className="font-black leading-[1.1] tracking-widest">
-            <span className="block mb-4 text-[clamp(48px,12vw,92px)]">MONITORING</span>
-            <span className="block mb-4 text-[clamp(48px,12vw,92px)]">INTERVENTION</span>
-            <span className="block mb-4 text-[clamp(48px,12vw,92px)]">MANAGING</span>
+          <h2 className="font-black leading-[1.1] tracking-widest text-center w-full">
+            <span className="block mb-4 text-[clamp(40px,10vw,92px)] md:text-[clamp(48px,12vw,92px)]">MONITORING</span>
+            <span className="block mb-4 text-[clamp(40px,10vw,92px)] md:text-[clamp(48px,12vw,92px)]">INTERVENTION</span>
+            <span className="block mb-4 text-[clamp(40px,10vw,92px)] md:text-[clamp(48px,12vw,92px)]">MANAGING</span>
           </h2>
           <a href="#products" className="inline-block mt-10 border-2 border-brand-green px-10 py-3 rounded-full text-lg font-bold hover:bg-brand-green hover:text-white transition-all">
             了解更多
@@ -256,7 +256,7 @@ export default function App() {
               onClick={() => setActiveOverlay('monitorIframe')}
               className="bg-white rounded-[28px] p-10 md:p-12 cursor-pointer transition-all duration-500 border border-brand-green/5 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-green/10 group"
             >
-              <h3 className="text-2xl font-black mb-4">无线可穿戴多参数监护仪</h3>
+              <h3 className="text-2xl font-black mb-4">无线可穿戴多参数<br className="block md:hidden" />监护仪</h3>
               <p className="text-base font-bold opacity-85 mb-5">实时监测多项生命体征，提升医疗效率</p>
               <div className="max-h-[500px] opacity-100 mt-5 pt-5 md:max-h-0 md:opacity-0 md:mt-0 md:pt-0 md:group-hover:max-h-[500px] md:group-hover:opacity-100 md:group-hover:mt-5 md:group-hover:pt-5 border-t border-brand-green/10 transition-all duration-500 overflow-hidden">
                 <h5 className="font-bold mb-2">主要应用场景：</h5>
@@ -275,7 +275,7 @@ export default function App() {
               onClick={() => setActiveOverlay('wearableSystemDetail')}
               className="bg-white rounded-[28px] p-10 md:p-12 cursor-pointer transition-all duration-500 border border-brand-green/5 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-green/10 group"
             >
-              <h3 className="text-2xl font-black mb-4">无线可穿戴多参数监护系统</h3>
+              <h3 className="text-2xl font-black mb-4">无线可穿戴多参数<br className="block md:hidden" />监护系统</h3>
               <p className="text-base font-bold opacity-85 mb-5">模块化集成化监护解决方案，支持远程医疗</p>
               <div className="max-h-[500px] opacity-100 mt-5 pt-5 md:max-h-0 md:opacity-0 md:mt-0 md:pt-0 md:group-hover:max-h-[500px] md:group-hover:opacity-100 md:group-hover:mt-5 md:group-hover:pt-5 border-t border-brand-green/10 transition-all duration-500 overflow-hidden">
                 <p className="text-sm mb-2 leading-relaxed">自由穿戴—四组传感器自由穿戴</p>
