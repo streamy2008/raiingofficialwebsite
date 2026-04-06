@@ -83,6 +83,7 @@ const PRODUCT_DETAILS: Record<string, ProductDetail> = {
 export default function App() {
   const [activeOverlay, setActiveOverlay] = useState<string | null>(null);
   const [contactModal, setContactModal] = useState<{ title: string; contact: string; phone: string } | null>(null);
+  const [isContactMenuOpen, setIsContactMenuOpen] = useState(false);
 
   // Animation variants
   const revealVariants = {
@@ -97,40 +98,58 @@ export default function App() {
         <div className="max-w-5xl mx-auto h-full flex justify-center items-center px-6">
           <nav>
             <ul className="flex items-center gap-4 md:gap-8 list-none">
-              <li><a href="#home" className="text-[13px] font-normal h-12 flex items-center hover:opacity-70 transition-opacity">首页</a></li>
-              <li><a href="#products" className="text-[13px] font-normal h-12 flex items-center hover:opacity-70 transition-opacity">产品</a></li>
-              <li>
+              <li className="hidden md:block"><a href="#home" className="text-[13px] font-normal h-12 flex items-center hover:opacity-70 transition-opacity">首页</a></li>
+              <li className="hidden md:block"><a href="#products" className="text-[13px] font-normal h-12 flex items-center hover:opacity-70 transition-opacity">产品</a></li>
+              <li className="hidden md:block">
                 <a href="#solutions" className="text-[13px] font-normal h-12 flex items-center hover:opacity-70 transition-opacity">
-                  <span className="text-center leading-[1.2]">解决<br className="md:hidden" />方案</span>
+                  <span className="text-center leading-[1.2]">解决方案</span>
                 </a>
               </li>
-              <li>
+              <li className="hidden md:block">
                 <a href="#partners" className="text-[13px] font-normal h-12 flex items-center hover:opacity-70 transition-opacity">
-                  <span className="text-center leading-[1.2]">合作<br className="md:hidden" />伙伴</span>
+                  <span className="text-center leading-[1.2]">合作伙伴</span>
                 </a>
               </li>
-              <li>
+              <li className="hidden md:block">
                 <a href="#news" className="text-[13px] font-normal h-12 flex items-center hover:opacity-70 transition-opacity">
-                  <span className="text-center leading-[1.2]">新闻<br className="md:hidden" />资讯</span>
+                  <span className="text-center leading-[1.2]">新闻资讯</span>
                 </a>
               </li>
               <li className="relative group">
-                <button className="text-[13px] font-normal h-12 flex items-center gap-1 hover:opacity-70 transition-opacity cursor-pointer">
-                  <span className="text-center leading-[1.2]">联系<br className="md:hidden" />我们</span> 
+                <button 
+                  onClick={() => setIsContactMenuOpen(!isContactMenuOpen)}
+                  className="text-[13px] font-normal h-12 flex items-center gap-1 hover:opacity-70 transition-opacity cursor-pointer relative z-10"
+                >
+                  <span className="text-center leading-[1.2]">联系我们</span> 
                   <ChevronDown size={12} />
                 </button>
+                
+                {/* Invisible overlay to catch clicks outside on mobile */}
+                {isContactMenuOpen && (
+                  <div 
+                    className="fixed inset-0 z-0 md:hidden" 
+                    onClick={() => setIsContactMenuOpen(false)}
+                  />
+                )}
+
                 {/* Submenu */}
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 transition-all duration-300 z-10 ${isContactMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible md:group-hover:opacity-100 md:group-hover:visible'}`}>
                   <div className="bg-white rounded-2xl apple-shadow w-72 p-3 border border-brand-green/10">
                     <button 
-                      onClick={() => setContactModal({ title: '无线体温业务', contact: '联系人：董先生', phone: '+86-18600145600' })}
+                      onClick={() => {
+                        setContactModal({ title: '无线体温业务', contact: '联系人：董先生', phone: '+86-18600145600' });
+                        setIsContactMenuOpen(false);
+                      }}
                       className="w-full text-left p-4 rounded-xl hover:bg-apple-grey transition-all group/item"
                     >
                       <h4 className="text-base font-bold mb-1 border-b border-brand-green/10 pb-1">无线体温业务</h4>
                       <p className="text-xs opacity-80">点击查看联系详情</p>
                     </button>
                     <button 
-                      onClick={() => setContactModal({ title: '无线多参数监护业务', contact: '联系人：赵先生', phone: '+86-18884113373' })}
+                      onClick={() => {
+                        setContactModal({ title: '无线多参数监护业务', contact: '联系人：赵先生', phone: '+86-18884113373' });
+                        setIsContactMenuOpen(false);
+                      }}
                       className="w-full text-left p-4 rounded-xl hover:bg-apple-grey transition-all mt-2"
                     >
                       <h4 className="text-base font-bold mb-1 border-b border-brand-green/10 pb-1">无线多参数监护业务</h4>

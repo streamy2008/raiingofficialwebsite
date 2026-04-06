@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700;900&display=swap');
 
 @theme {
-  --font-serif: "Noto Serif SC", serif;
+  --font-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", "Apple LiSung", "PingFang SC", "Microsoft YaHei", sans-serif;
   --color-brand-green: #07904C;
   --color-apple-grey: #f5f5f7;
   --animate-breathe: breathe 4s ease-in-out infinite;
