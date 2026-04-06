@@ -164,15 +164,21 @@ export default function App() {
       </header>
 
       {/* --- Hero Banner --- */}
-      <section className="h-[400px] bg-brand-green flex items-center justify-center mt-12 overflow-hidden px-4">
+      <section className="h-[400px] bg-brand-green flex items-start pt-[133px] md:items-center md:pt-0 justify-center mt-12 overflow-hidden px-8 md:px-4">
         <motion.h1 
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={revealVariants}
-          className="text-4xl md:text-5xl font-bold text-white tracking-tight text-center"
+          className="text-4xl md:text-5xl font-bold text-white tracking-tight text-right md:text-center w-full"
         >
-          Connect Health For Tomorrow
+          <span className="block md:inline">Connect</span>
+          <span className="hidden md:inline"> </span>
+          <span className="block md:inline">Health</span>
+          <span className="hidden md:inline"> </span>
+          <span className="block md:inline">For</span>
+          <span className="hidden md:inline"> </span>
+          <span className="block md:inline">Tomorrow</span>
         </motion.h1>
       </section>
 
@@ -206,7 +212,11 @@ export default function App() {
             variants={revealVariants}
             className="text-center text-3xl font-bold mb-16"
           >
-            可穿戴监护 低体温干预 围术期管理
+            <span className="block md:inline">可穿戴监护</span>
+            <span className="hidden md:inline"> </span>
+            <span className="block md:inline">低体温干预</span>
+            <span className="hidden md:inline"> </span>
+            <span className="block md:inline">围术期管理</span>
           </motion.h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -315,7 +325,7 @@ export default function App() {
           className="max-w-4xl mx-auto"
         >
           <h2 className="text-3xl font-black mb-8">关于我们</h2>
-          <div className="text-base leading-[2.2] text-justify opacity-95">
+          <div className="text-base leading-relaxed md:leading-[2.2] text-justify opacity-95">
             睿仁医疗科技，旗下拥有北京睿仁医疗科技有限公司和湖南万木千帆科技有限公司两个科技运营实体，拥有包括万木千帆®、CareClever®、iThermonitor®、发烧总监®、iFertracker®、孕律®在内的多个健康医疗品牌。我们设计打造穿戴式生命监测、物联网解决方案、数据及人工智能服务，帮助医生更好地诊断、管理、预防和干预，帮助人们更好地管理自己的健康。
           </div>
         </motion.div>
@@ -330,21 +340,25 @@ export default function App() {
           variants={revealVariants}
           className="max-w-5xl mx-auto"
         >
-          <div className="flex flex-wrap justify-center gap-4 text-xs mb-4">
-            <a href="tel:010-64118658" className="flex items-center gap-1 hover:opacity-70 transition-opacity"><Phone size={12} /> 010-64118658</a>
-            <span className="opacity-30">|</span>
-            <a href="tel:010-56411036" className="flex items-center gap-1 hover:opacity-70 transition-opacity"><Phone size={12} /> 010-56411036</a>
-            <span className="opacity-30">|</span>
-            <a href="mailto:support@raiing.com" className="flex items-center gap-1 hover:opacity-70 transition-opacity"><Mail size={12} /> support@raiing.com</a>
-            <span className="opacity-30">|</span>
-            <a 
-              href="https://uri.amap.com/search?keyword=北京市朝阳区北苑东路19号中国铁建广场E座" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-1 hover:opacity-70 transition-opacity"
-            >
-              <MapPin size={12} /> 北京市朝阳区北苑东路19号中国铁建广场E座
-            </a>
+          <div className="flex flex-col md:flex-row md:flex-wrap items-center md:justify-center gap-3 md:gap-4 text-xs mb-4">
+            <div className="flex items-center gap-3 md:gap-4">
+              <a href="tel:010-64118658" className="flex items-center gap-1 hover:opacity-70 transition-opacity"><Phone size={12} /> 010-64118658</a>
+              <span className="opacity-30">|</span>
+              <a href="tel:010-56411036" className="flex items-center gap-1 hover:opacity-70 transition-opacity"><Phone size={12} /> 010-56411036</a>
+            </div>
+            <span className="opacity-30 hidden md:inline">|</span>
+            <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4">
+              <a href="mailto:support@raiing.com" className="flex items-center gap-1 hover:opacity-70 transition-opacity"><Mail size={12} /> support@raiing.com</a>
+              <span className="opacity-30 hidden md:inline">|</span>
+              <a 
+                href="https://uri.amap.com/search?keyword=北京市朝阳区北苑东路19号中国铁建广场E座" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 hover:opacity-70 transition-opacity text-center md:text-left"
+              >
+                <MapPin size={12} className="shrink-0" /> <span>北京市朝阳区北苑东路19号中国铁建广场E座</span>
+              </a>
+            </div>
           </div>
           <div className="text-[10px] opacity-60">
             Copyright © 2022 Raiing All rights reserved. 京ICP备14029927号-1 药品医疗器械网络信息服务备案[(京)网药械信息备字（2023）第 00356 号]
