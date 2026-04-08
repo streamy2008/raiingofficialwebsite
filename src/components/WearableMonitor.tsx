@@ -333,9 +333,18 @@ const getRespScore = (val: number) => {
   if (val <= 8) return 3; if (val >= 9 && val <= 11) return 1; if (val >= 12 && val <= 20) return 0;
   if (val >= 21 && val <= 24) return 2; if (val >= 25) return 3; return 0;
 };
-const getSpO2Score = (val: number) => {
-  if (val <= 91) return 3; if (val >= 92 && val <= 93) return 2; if (val >= 94 && val <= 95) return 1;
-  if (val >= 96) return 0; return 0;
+const getSpO2Score = (val: number, scale: number = 1, oxygen: boolean = false) => {
+  if (scale === 1) {
+    if (val <= 91) return 3; if (val >= 92 && val <= 93) return 2; if (val >= 94 && val <= 95) return 1;
+    if (val >= 96) return 0; return 0;
+  } else {
+    if (val <= 83) return 3; if (val >= 84 && val <= 85) return 2; if (val >= 86 && val <= 87) return 1;
+    if (val >= 88 && val <= 92) return 0; 
+    if (val >= 93 && val <= 94) return oxygen ? 1 : 0; 
+    if (val >= 95 && val <= 96) return oxygen ? 2 : 0; 
+    if (val >= 97) return oxygen ? 3 : 0; 
+    return 0;
+  }
 };
 const getOxygenScore = (val: boolean) => val ? 2 : 0;
 const getBPScore = (val: string) => {
@@ -359,7 +368,7 @@ export default function WearableMonitor() {
   const [isManualMode, setIsManualMode] = useState(false);
   const [vitalValues, setVitalValues] = useState<Record<string, any>>({
     HR: 75, SpO2: 93, BP: '120/80', Resp: 16, Temp: 37.0, Sleep: 6.5, Exercise: 40,
-    Oxygen: false, Consciousness: '清楚'
+    Oxygen: false, Consciousness: '清楚', SpO2Scale: 1
   });
 
   const updateVital = (key: string, value: any) => {
@@ -390,7 +399,7 @@ export default function WearableMonitor() {
 
   const ewsScores = useMemo(() => {
     const hr = getHRScore(vitalValues.HR);
-    const spo2 = getSpO2Score(vitalValues.SpO2);
+    const spo2 = getSpO2Score(vitalValues.SpO2, vitalValues.SpO2Scale || 1, vitalValues.Oxygen);
     const bp = getBPScore(vitalValues.BP);
     const resp = getRespScore(vitalValues.Resp);
     const temp = getTempScore(vitalValues.Temp);
@@ -483,15 +492,21 @@ export default function WearableMonitor() {
             <div className="flex flex-col gap-3 mt-4 bg-black/10 p-4 rounded-2xl border border-white/10 backdrop-blur-md w-full max-w-[180px] lg:max-w-[256px] text-left">
               <div className="text-xs font-bold opacity-60 uppercase mb-1">NEWS2 附加参数</div>
               <div className="flex items-center justify-between gap-4">
-                <span className="text-sm font-bold">是否吸氧</span>
+                <span className="text-sm font-bold shrink-0">是否吸氧</span>
                 <button onClick={() => updateVital('Oxygen', !vitalValues.Oxygen)} className={`px-3 py-1 rounded-full text-xs font-bold transition-colors ${vitalValues.Oxygen ? 'bg-blue-500 text-white' : 'bg-white/10 text-white/60'}`}>
                   {vitalValues.Oxygen ? '是 (2分)' : '否 (0分)'}
                 </button>
               </div>
               <div className="flex items-center justify-between gap-4">
-                <span className="text-sm font-bold">意识状态</span>
+                <span className="text-sm font-bold shrink-0">意识状态</span>
                 <button onClick={() => updateVital('Consciousness', vitalValues.Consciousness === '清楚' ? 'CVPU' : '清楚')} className={`px-3 py-1 rounded-full text-xs font-bold transition-colors ${vitalValues.Consciousness === 'CVPU' ? 'bg-red-500 text-white' : 'bg-white/10 text-white/60'}`}>
                   {vitalValues.Consciousness === 'CVPU' ? 'CVPU (3分)' : '清楚 (0分)'}
+                </button>
+              </div>
+              <div className="flex items-center justify-between gap-4">
+                <span className="text-sm font-bold shrink-0">血氧量表</span>
+                <button onClick={() => updateVital('SpO2Scale', vitalValues.SpO2Scale === 1 ? 2 : 1)} className={`px-3 py-1 rounded-full text-xs font-bold transition-colors ${vitalValues.SpO2Scale === 2 ? 'bg-purple-500 text-white' : 'bg-white/10 text-white/60'}`}>
+                  {vitalValues.SpO2Scale === 2 ? '量表 2' : '量表 1'}
                 </button>
               </div>
             </div>
@@ -518,7 +533,7 @@ export default function WearableMonitor() {
           </div>
         </div>
 
-        <div className="relative lg:absolute lg:right-12 lg:bottom-12 w-[calc(100%-3rem)] mx-6 lg:mx-0 lg:w-96 h-28 lg:h-32 bg-black/20 backdrop-blur-xl rounded-2xl lg:rounded-[2rem] border border-white/10 p-4 lg:p-6 overflow-hidden mt-8 mb-12 lg:mt-0 lg:mb-0 z-30 flex flex-col shrink-0" onClick={(e) => e.stopPropagation()}>
+        <div className="relative lg:absolute lg:left-12 lg:bottom-12 w-[calc(100%-3rem)] mx-6 lg:mx-0 lg:w-96 h-28 lg:h-[264px] bg-black/20 backdrop-blur-xl rounded-2xl lg:rounded-[2rem] border border-white/10 p-4 lg:p-6 overflow-hidden mt-8 mb-12 lg:mt-0 lg:mb-0 z-30 flex flex-col shrink-0" onClick={(e) => e.stopPropagation()}>
           <div className="flex justify-between items-center mb-2 shrink-0">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
