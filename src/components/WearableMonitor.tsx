@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Activity, 
@@ -371,6 +371,27 @@ export default function WearableMonitor() {
     Oxygen: false, Consciousness: '清楚', SpO2Scale: 1
   });
 
+  const news2Ref = useRef<HTMLDivElement>(null);
+  const [news2Metrics, setNews2Metrics] = useState({ top: 0, height: 0 });
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    const updateMetrics = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+      if (news2Ref.current) {
+        const parentTop = news2Ref.current.parentElement?.offsetTop || 48;
+        setNews2Metrics({
+          top: news2Ref.current.offsetTop + parentTop,
+          height: news2Ref.current.clientHeight
+        });
+      }
+    };
+    
+    setTimeout(updateMetrics, 100);
+    window.addEventListener('resize', updateMetrics);
+    return () => window.removeEventListener('resize', updateMetrics);
+  }, [vitalValues]);
+
   const updateVital = (key: string, value: any) => {
     setIsManualMode(true);
     setVitalValues(v => ({ ...v, [key]: value }));
@@ -518,7 +539,7 @@ export default function WearableMonitor() {
               </motion.div>
             </div>
 
-            <div className="mt-2 lg:mt-4 bg-black/10 backdrop-blur-md p-3 lg:p-6 rounded-2xl lg:rounded-3xl border border-white/5 w-full max-w-[180px] lg:max-w-[256px] text-left">
+            <div ref={news2Ref} className="mt-2 lg:mt-4 bg-black/10 backdrop-blur-md p-3 lg:p-6 rounded-2xl lg:rounded-3xl border border-white/5 w-full max-w-[180px] lg:max-w-[256px] text-left">
               <div className="text-[8px] lg:text-[10px] font-black uppercase tracking-widest opacity-40 mb-2 lg:mb-4">早期风险预警评分 (NEWS2)</div>
               <div className="flex flex-col gap-2 lg:gap-3">
                 <EWSItem label="呼吸频率" score={ewsScores.resp} color={ewsScores.resp > 0 ? '#fff' : '#22c55e'} />
@@ -533,7 +554,11 @@ export default function WearableMonitor() {
           </div>
         </div>
 
-        <div className="relative lg:absolute lg:left-12 lg:bottom-12 w-[calc(100%-3rem)] mx-6 lg:mx-0 lg:w-96 h-28 lg:h-[264px] bg-black/20 backdrop-blur-xl rounded-2xl lg:rounded-[2rem] border border-white/10 p-4 lg:p-6 overflow-hidden mt-8 mb-12 lg:mt-0 lg:mb-0 z-30 flex flex-col shrink-0" onClick={(e) => e.stopPropagation()}>
+        <div 
+          className="relative lg:absolute lg:left-12 w-[calc(100%-3rem)] mx-6 lg:mx-0 lg:w-96 h-28 bg-black/20 backdrop-blur-xl rounded-2xl lg:rounded-[2rem] border border-white/10 p-4 lg:p-6 overflow-hidden mt-8 mb-12 lg:mt-0 lg:mb-0 z-30 flex flex-col shrink-0" 
+          style={isDesktop && news2Metrics.height ? { height: `${news2Metrics.height}px`, top: `${news2Metrics.top}px` } : (isDesktop ? { bottom: '3rem', height: '264px' } : {})}
+          onClick={(e) => e.stopPropagation()}
+        >
           <div className="flex justify-between items-center mb-2 shrink-0">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
